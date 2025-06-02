@@ -8,6 +8,20 @@ public class Test {
         }
 
         if(args[0].equals("0")){
+
+            LRUCache lru = new LRUCache(2);
+            lru.put(1, 1);
+            lru.put(2, 2);
+            System.out.println(lru.get(1));       
+            lru.put(3, 3);
+            System.out.println(lru.get(2));       
+            lru.put(4, 4);
+            System.out.println(lru.get(1));       
+            System.out.println(lru.get(3));       
+            System.out.println(lru.get(4));
+        }
+        else{
+
             MyHashMap hashMap = new MyHashMap();
             hashMap.put(1, 10);
             hashMap.put(2,20);
@@ -20,19 +34,6 @@ public class Test {
             System.out.println(hashMap.get(2));
     
             // hashMap.displayAll();
-        }
-        else{
-            LRUCache lru = new LRUCache(2);
-            lru.put(1, 1);
-            lru.put(2, 2);
-            System.out.println(lru.get(1));       
-            lru.put(3, 3);
-            System.out.println(lru.get(2));       
-            lru.put(4, 4);
-            System.out.println(lru.get(1));       
-            System.out.println(lru.get(3));       
-            System.out.println(lru.get(4));
-    
         }
 
     }
