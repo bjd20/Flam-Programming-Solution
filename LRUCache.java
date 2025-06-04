@@ -14,12 +14,12 @@ class LRUCache {
     }
     
     private int capacity;
-    private HashMap<Integer, Node> cache;
+    private HashMap<Integer, Node> cacheMap;
     private Node head, tail;
     
     public LRUCache(int capacity) {
         this.capacity = capacity;
-        this.cache = new HashMap<>();
+        this.cacheMap = new HashMap<>();
         // dummy head and tail nodes
         this.head = new Node(0, 0);
         this.tail = new Node(0, 0);
@@ -28,7 +28,7 @@ class LRUCache {
     }
     
     public int get(int key) {
-        Node node = cache.get(key);
+        Node node = cacheMap.get(key);
         if (node == null) {
             return -1;
         }
@@ -38,19 +38,20 @@ class LRUCache {
     }
     
     public void put(int key, int value) {
-        Node node = cache.get(key);
-        if (node != null) {
+        Node node = cacheMap.get(key);
+        if (node != null) { // Already exist : Just update value
             node.value = value;
             moveToFront(node);
         } else {
             Node newNode = new Node(key, value);
-            cache.put(key, newNode);
+            cacheMap.put(key, newNode);
             addToFront(newNode);
-            // Check if over capacity
-            if (cache.size() > capacity) {
-                Node lru = tail.prev;
-                removeNode(lru);
-                cache.remove(lru.key);
+
+            // Check capacity
+            if (cacheMap.size() > capacity) {
+                Node evict = tail.prev;
+                removeNode(evict);
+                cacheMap.remove(evict.key);
             }
         }
     }
@@ -70,5 +71,14 @@ class LRUCache {
     private void moveToFront(Node node) {
         removeNode(node);
         addToFront(node);
+    }
+
+    public void displayAll(){
+
+        System.out.printf("All the contents of cache: \n");
+
+        for(int k : cacheMap.keySet()){
+            System.out.println(k + " : " + cacheMap.get(k).value);
+        }
     }
 }

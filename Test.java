@@ -19,6 +19,8 @@ public class Test {
             System.out.println(lru.get(1));       
             System.out.println(lru.get(3));       
             System.out.println(lru.get(4));
+
+            // lru.displayAll();
         }
         else{
 

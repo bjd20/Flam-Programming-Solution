@@ -12,7 +12,7 @@ public class MyHashMap {
     }
 
     private int n; // No. of nodes
-    private int N; // Size of bucket array;
+    private int N; // size of bucket array;
     private Node[] buckets;  // bucket array
 
     public MyHashMap(){
@@ -24,7 +24,7 @@ public class MyHashMap {
         return K % N;
     }
 
-    private void reHash(){
+    private void reHash(){      // For collision handling and maintaining O(1) average-case time
         this.N *= 2;
         n=0;
 
@@ -39,8 +39,6 @@ public class MyHashMap {
                 curr = curr.next;
             }
         }
-
-
     }
 
     public void put(int k, int v){
@@ -63,7 +61,9 @@ public class MyHashMap {
         }
 
         n++;
-        double lambda  = (double) n/N;       // lambda is a threshold.
+
+        // Checking over-collison
+        double lambda  = (double) n/N;       // 2 is the threshold value.
         if(lambda > 2.0){
             reHash();
         }
@@ -113,7 +113,7 @@ public class MyHashMap {
         for (int i = 0; i < buckets.length; i++) {
             Node curr = buckets[i];
             while(curr != null){
-                System.out.println(curr.key+ " : " +curr.value);
+                System.out.println(curr.key+ " : " + curr.value);
                 curr = curr.next;
             }
         }
